@@ -202,6 +202,10 @@ func (p *AttestorPlugin) Attest(stream nodeattestorv1.NodeAttestor_AttestServer)
 		}
 	}
 
+	for _, taint := range node.Spec.Taints {
+		selectorValues = append(selectorValues, k8s.MakeSelectorValue("agent_node_taint", taint.Key, taint.Value, string(taint.Effect)))
+	}
+
 	return stream.Send(&nodeattestorv1.AttestResponse{
 		Response: &nodeattestorv1.AttestResponse_AgentAttributes{
 			AgentAttributes: &nodeattestorv1.AgentAttributes{
