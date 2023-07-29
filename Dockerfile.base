@@ -1,0 +1,7 @@
+# Building Tool and SPIRE Server / SPIRE Agent
+# Build stage
+ARG PLATFORM
+
+FROM --platform=${PLATFORM} ubuntu:xenial as spire-base
+RUN sed -i 's#archive.ubuntu.com#mirrors.aliyun.com#g' /etc/apt/sources.list 
+RUN apt-get update && apt-get -y install curl unzip git build-essential ca-certificates libssl-dev

@@ -1,0 +1,17 @@
+ARG BASE
+ARG BUILDER
+ARG PLATFORM
+
+FROM --platform=${PLATFORM} ${BUILDER} as builder
+WORKDIR /spire
+ADD ./ ./
+RUN go mod download
+RUN make bin/spire-server -f 0.Makefile
+
+FROM --platform=${PLATFORM} ${BASE} as spire-server
+USER root
+COPY --from=builder /spire/bin/spire-server /spire/bin/spire-server
+RUN chmod 555 /spire/bin/*
+WORKDIR /spire
+ENTRYPOINT ["/spire/bin/spire-server", "run"]
+CMD []
