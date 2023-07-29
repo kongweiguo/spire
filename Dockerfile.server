@@ -6,7 +6,7 @@ FROM --platform=${PLATFORM} ${BUILDER} as builder
 WORKDIR /spire
 ADD ./ ./
 RUN go mod download
-RUN make bin/spire-server -f 0.Makefile
+RUN make bin/spire-server
 
 FROM --platform=${PLATFORM} ${BASE} as spire-server
 USER root

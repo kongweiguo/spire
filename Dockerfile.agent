@@ -6,12 +6,12 @@ FROM --platform=${PLATFORM} ${BUILDER} as builder
 WORKDIR /spire
 ADD ./ ./
 RUN go mod download
-RUN make bin/spire-agent -f 0.Makefile
+RUN make bin/spire-agent
 
 FROM --platform=${PLATFORM} ${BASE} as spire-agent
 USER root
-COPY --from=builder /spire/bin/spire-agent /spire/bin/spire-agent
-RUN chmod 555 /spire/bin/*
 WORKDIR /spire
+COPY --from=builder /spire/bin /spire/bin
+RUN chmod 555 /spire/bin/*
 ENTRYPOINT ["/spire/bin/spire-agent", "run"]
 CMD []
