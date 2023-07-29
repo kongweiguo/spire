@@ -1,5 +1,5 @@
-IMG_AGENT := cr-cn-beijing.volces.com/will/spire-agent:v1.7.1
-IMG_SERVER := cr-cn-beijing.volces.com/will/spire-server:v1.7.1
+IMG_AGENT := cr-cn-beijing.volces.com/will/kongweiguo-spire-agent:v1.7.1
+IMG_SERVER := cr-cn-beijing.volces.com/will/kongweiguo-spire-server:v1.7.1
 
 IMG_BASE := spire-base:latest
 IMG_BUILDER := spire-builder:latest
